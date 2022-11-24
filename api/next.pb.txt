@@ -3324,9 +3324,11 @@ file {
   syntax: "proto3"
 }
 file {
-  name: "google/rpc/status.proto"
-  package: "google.rpc"
+  name: "github.com/containerd/containerd/api/services/introspection/v1/introspection.proto"
+  package: "containerd.services.introspection.v1"
+  dependency: "github.com/containerd/containerd/api/types/platform.proto"
   dependency: "google/protobuf/any.proto"
+  dependency: "google/protobuf/empty.proto"
   message_type {
     name: "Status"
     field {
@@ -3352,21 +3354,6 @@ file {
       json_name: "details"
     }
   }
-  options {
-    java_package: "com.google.rpc"
-    java_outer_classname: "StatusProto"
-    java_multiple_files: true
-    go_package: "google.golang.org/genproto/googleapis/rpc/status;status"
-    objc_class_prefix: "RPC"
-  }
-  syntax: "proto3"
-}
-file {
-  name: "github.com/containerd/containerd/api/services/introspection/v1/introspection.proto"
-  package: "containerd.services.introspection.v1"
-  dependency: "github.com/containerd/containerd/api/types/platform.proto"
-  dependency: "google/rpc/status.proto"
-  dependency: "google/protobuf/empty.proto"
   message_type {
     name: "Plugin"
     field {
@@ -3418,7 +3405,7 @@ file {
       number: 7
       label: LABEL_OPTIONAL
       type: TYPE_MESSAGE
-      type_name: ".google.rpc.Status"
+      type_name: ".containerd.services.introspection.v1.Status"
       json_name: "initErr"
     }
     nested_type {

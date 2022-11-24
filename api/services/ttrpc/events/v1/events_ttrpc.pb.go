@@ -9,19 +9,17 @@ import (
 )
 
 type EventsService interface {
-	Forward(context.Context, *ForwardRequest) (*emptypb.Empty, error)
+	Forward(ctx context.Context, req *ForwardRequest) (*emptypb.Empty, error)
 }
 
 func RegisterEventsService(srv *ttrpc.Server, svc EventsService) {
-	srv.RegisterService("containerd.services.events.ttrpc.v1.Events", &ttrpc.ServiceDesc{
-		Methods: map[string]ttrpc.Method{
-			"Forward": func(ctx context.Context, unmarshal func(interface{}) error) (interface{}, error) {
-				var req ForwardRequest
-				if err := unmarshal(&req); err != nil {
-					return nil, err
-				}
-				return svc.Forward(ctx, &req)
-			},
+	srv.Register("containerd.services.events.ttrpc.v1.Events", map[string]ttrpc.Method{
+		"Forward": func(ctx context.Context, unmarshal func(interface{}) error) (interface{}, error) {
+			var req ForwardRequest
+			if err := unmarshal(&req); err != nil {
+				return nil, err
+			}
+			return svc.Forward(ctx, &req)
 		},
 	})
 }
@@ -35,7 +33,6 @@ func NewEventsClient(client *ttrpc.Client) EventsService {
 		client: client,
 	}
 }
-
 func (c *eventsClient) Forward(ctx context.Context, req *ForwardRequest) (*emptypb.Empty, error) {
 	var resp emptypb.Empty
 	if err := c.client.Call(ctx, "containerd.services.events.ttrpc.v1.Events", "Forward", req, &resp); err != nil {

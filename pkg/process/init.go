@@ -427,6 +427,10 @@ func (p *Init) checkpoint(ctx context.Context, r *CheckpointConfig) error {
 	if !r.Exit {
 		actions = append(actions, runc.LeaveRunning)
 	}
+	if r.Predump {
+		actions = append(actions, runc.PreDump)
+	}
+
 	// keep criu work directory if criu work dir is set
 	work := r.WorkDir
 	if work == "" {
@@ -436,6 +440,7 @@ func (p *Init) checkpoint(ctx context.Context, r *CheckpointConfig) error {
 	if err := p.runtime.Checkpoint(ctx, p.id, &runc.CheckpointOpts{
 		WorkDir:                  work,
 		ImagePath:                r.Path,
+		ParentPath:               r.ParentPath,
 		AllowOpenTCP:             r.AllowOpenTCP,
 		AllowExternalUnixSockets: r.AllowExternalUnixSockets,
 		AllowTerminal:            r.AllowTerminal,
