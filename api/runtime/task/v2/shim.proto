@@ -142,8 +142,6 @@ message CheckpointTaskRequest {
 	string id = 1;
 	string path = 2;
 	google.protobuf.Any options = 3;
-	bool predump = 4;
-	string parent_path = 5;
 }
 
 message UpdateTaskRequest {

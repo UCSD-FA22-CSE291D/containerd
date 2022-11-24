@@ -1641,20 +1641,6 @@ file {
       type_name: ".google.protobuf.Any"
       json_name: "options"
     }
-    field {
-      name: "predump"
-      number: 4
-      label: LABEL_OPTIONAL
-      type: TYPE_BOOL
-      json_name: "predump"
-    }
-    field {
-      name: "parent_path"
-      number: 5
-      label: LABEL_OPTIONAL
-      type: TYPE_STRING
-      json_name: "parentPath"
-    }
   }
   message_type {
     name: "UpdateTaskRequest"
