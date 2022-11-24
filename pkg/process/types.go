@@ -57,7 +57,9 @@ type ExecConfig struct {
 type CheckpointConfig struct {
 	WorkDir                  string
 	Path                     string
+	ParentPath               string
 	Exit                     bool
+	Predump                  bool
 	AllowOpenTCP             bool
 	AllowExternalUnixSockets bool
 	AllowTerminal            bool

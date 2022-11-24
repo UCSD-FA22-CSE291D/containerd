@@ -478,7 +478,9 @@ func (c *Container) Checkpoint(ctx context.Context, r *task.CheckpointTaskReques
 	}
 	return p.(*process.Init).Checkpoint(ctx, &process.CheckpointConfig{
 		Path:                     r.Path,
+		ParentPath:               r.ParentPath,
 		Exit:                     opts.Exit,
+		Predump:                  r.Predump,
 		AllowOpenTCP:             opts.OpenTcp,
 		AllowExternalUnixSockets: opts.ExternalUnixSockets,
 		AllowTerminal:            opts.Terminal,
